@@ -2,7 +2,7 @@ export enum FieldNames {
   FirstName = 'firstName',
   LastName = 'lastName',
   Email = 'email',
-  Organization = 'organization',
+  Organization = 'org',
   EuResident = 'euResident',
   Updates = 'updates',
 }
