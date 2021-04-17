@@ -16,9 +16,15 @@ export class NewsletterService {
   constructor(private readonly mockSvc: MockService) {}
 
   public saveNewsletter(newsletter: NewsletterForm): Observable<NewsletterResponse> {
-    //  ...Do some processing from form model to DTO..
+    const dto = Object.entries(newsletter).reduce((obj, kvp) => {
+      const [key, value] = kvp;
 
-    return this.mockSvc.post<NewsletterDto>(this.moduleEndpoint, newsletter).pipe(
+      return { ...obj, [key]: typeof value === 'string' ? encodeURI(value.trim()) : value };
+    }, {} as NewsletterDto);
+
+    console.log(dto);
+
+    return this.mockSvc.post<NewsletterDto>(this.moduleEndpoint, dto).pipe(
       map(() => ({ status: 'success', message: 'Thank you. You are now subscribed.' })),
       catchError(() => of({ status: 'error', message: 'Invalid Subscription request.' })),
       take(1),
