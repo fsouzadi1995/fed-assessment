@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize, take, tap } from 'rxjs/operators';
-import { FieldNames } from 'src/app/constants/newsletter/newsletter.constants';
-import { EmailOptions } from 'src/app/models/newsletter/email-options.model';
-import { NewsletterResponse } from 'src/app/models/newsletter/newsletter-response.model';
+import { FieldNames } from '@constants/newsletter/newsletter.constants';
+import { EmailOptions } from '@models/newsletter/email-options.model';
+import { NewsletterResponse } from '@models/newsletter/newsletter-response.model';
 import { NewsletterService } from './services/newsletter.service';
 
 @Component({

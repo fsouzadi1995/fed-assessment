@@ -18,7 +18,7 @@ export class MockService {
       switchMap(() => {
         const rnd = Math.floor(Math.random() * 2);
 
-        return rnd !== 0 ? of(true) : throwError('oh no');
+        return rnd !== 0 ? of(true) : throwError('oh no, something bad happened!');
       }),
     );
   }

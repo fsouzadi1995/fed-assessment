@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { AppEndpoints } from 'src/app/constants/global/endpoints.constants';
-import { MockService } from 'src/app/core/services/mock.service';
-import { NewsletterForm } from '../../../models/newsletter/newsletter-form.model';
-import { NewsletterDto } from 'src/app/models/newsletter/newsletter.dto';
+import { AppEndpoints } from '@constants/global/endpoints.constants';
+import { MockService } from '@core/services/mock.service';
+import { NewsletterForm } from '@models/newsletter/newsletter-form.model';
+import { NewsletterDto } from '@models/newsletter/newsletter.dto';
 import { catchError, map, take } from 'rxjs/operators';
-import { NewsletterResponse } from 'src/app/models/newsletter/newsletter-response.model';
+import { NewsletterResponse } from '@models/newsletter/newsletter-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +16,7 @@ export class NewsletterService {
   constructor(private readonly mockSvc: MockService) {}
 
   public saveNewsletter(newsletter: NewsletterForm): Observable<NewsletterResponse> {
-    /**
-      ...Do some processing from form model to DTO..
-    */
+    //  ...Do some processing from form model to DTO..
 
     return this.mockSvc.post<NewsletterDto>(this.moduleEndpoint, newsletter).pipe(
       map(() => ({ status: 'success', message: 'Thank you. You are now subscribed.' })),
