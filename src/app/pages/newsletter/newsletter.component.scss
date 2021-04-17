@@ -1,5 +1,5 @@
-@use '../../sass/mixins.scss';
-@use '../../sass/variables.scss';
+@use 'mixins';
+@use 'variables';
 
 :host {
   $shadow: 0 3px 5px 0px variables.$shadow_light;
