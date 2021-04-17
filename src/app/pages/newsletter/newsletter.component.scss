@@ -1,0 +1,249 @@
+@use '../../sass/_mixins.scss';
+@use '../../sass/_variables.scss';
+
+.container {
+  padding: 1em;
+  max-width: 1024px;
+  margin: auto;
+
+  sub {
+    margin-top: 1em;
+    color: variables.$text_light;
+  }
+
+  .newsletter-form {
+    @include mixins.flex;
+    @include mixins.flex-direction(column);
+
+    .form-control-row {
+      @include mixins.flex;
+      @include mixins.flex-direction(column);
+
+      .form-control {
+        margin-top: 2.5em;
+        width: 100%;
+        @include mixins.flex;
+        @include mixins.flex-direction(column);
+        gap: 1em;
+
+        &.form-control-updates {
+          width: 100%;
+          display: grid;
+          grid-template-areas: 'a';
+          justify-content: space-between;
+          flex-wrap: wrap;
+
+          @media screen and (min-width: variables.$md-breakpoint-up) {
+            width: 62.5%;
+            gap: 2em;
+            grid-template-areas: 'a a';
+          }
+
+          & .form-control__checkbox {
+            display: inline-flex;
+            align-items: center;
+
+            input {
+              display: none;
+            }
+
+            label {
+              @include mixins.flex;
+              justify-content: center;
+              align-items: center;
+              background-color: white;
+              border: 3px solid #ffffff;
+              outline: 3px solid variables.$primary;
+              height: 22px;
+              width: 22px;
+              display: block;
+              cursor: pointer;
+
+              div {
+                margin: auto;
+                height: 100%;
+                width: 70%;
+
+                & svg {
+                  display: flex;
+                  justify-content: center;
+                  fill: transparent;
+                  height: 100%;
+                  width: 100%;
+                }
+              }
+            }
+
+            input:checked + label {
+              border: none;
+              outline: none;
+              height: 22px;
+              width: 22px;
+              padding: 3px;
+              background-clip: padding-box;
+              background-color: variables.$accent;
+
+              & svg {
+                fill: white;
+              }
+            }
+
+            span {
+              cursor: pointer;
+              margin-left: 1.25em;
+              letter-spacing: 1px;
+
+              &:focus-within {
+                outline: 3px solid variables.$primary_strong;
+              }
+
+              &::selection {
+                background-color: transparent;
+                color: black;
+              }
+            }
+          }
+        }
+
+        .form-control-info {
+          @include mixins.flex;
+          @include mixins.flex-direction(row);
+
+          label {
+            letter-spacing: 0.75px;
+            font-size: 1rem;
+          }
+
+          small {
+            position: absolute;
+            right: 0;
+            color: variables.$danger;
+            font-style: italic;
+            font-weight: 700;
+            transition: opacity 0.1s ease-in-out;
+
+            @media screen and (min-width: variables.$md-breakpoint-up) {
+              top: -1.75em;
+              right: unset;
+            }
+          }
+
+          @media screen and (min-width: variables.$md-breakpoint-up) {
+            @include mixins.flex-direction(column);
+          }
+        }
+
+        select {
+          cursor: pointer;
+          width: 100%;
+          background: white url('../../../assets/svgs/text-expand-arrow.svg') no-repeat;
+          background-position: right 1.5em top 50%;
+          background-size: 0.7em;
+          letter-spacing: 1px;
+
+          @media screen and (min-width: variables.$md-breakpoint-up) {
+            width: 25%;
+          }
+        }
+
+        input:not(input[type='checkbox']),
+        select {
+          padding: 0.75em;
+          border: 3px solid variables.$primary;
+          box-shadow: 0 3px 5px 0px variables.$shadow_light;
+          font-size: 0.9rem;
+
+          &:focus {
+            outline: 1px transparent;
+            border: 3px solid variables.$primary_strong;
+          }
+
+          &.error {
+            border: 3px solid variables.$danger_light;
+            background-color: variables.$background_danger;
+          }
+        }
+      }
+
+      @media screen and (min-width: variables.$md-breakpoint-up) {
+        width: 100%;
+        gap: 2em;
+        @include mixins.flex-direction(row);
+      }
+    }
+
+    .form-actions {
+      margin-top: 3em;
+      @include mixins.flex;
+      @include mixins.flex-direction(row-reverse);
+      justify-content: space-around;
+      width: 100%;
+
+      button {
+        color: white;
+        border-radius: 9999px;
+        letter-spacing: 1px;
+        padding: 0.75em 4em;
+        border: 3px solid transparent;
+        box-shadow: 0 3px 5px 0px variables.$shadow_light;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.1s ease-in-out;
+
+        &:focus {
+          outline: none;
+          border: 3px solid variables.$primary_strong;
+        }
+
+        &:first-child {
+          background-color: variables.$accent;
+
+          &:disabled {
+            background-color: variables.$disabled;
+            color: rgb(31 30 30 / 85%);
+            cursor: not-allowed;
+          }
+
+          &:not(:disabled):hover {
+            background-color: rgba(variables.$accent, 0.8);
+          }
+        }
+
+        &:last-child {
+          margin-left: 2em;
+          background-color: white;
+          color: black;
+          font-weight: 400;
+
+          &:hover {
+            background-color: rgba(variables.$text_contrast, 0.01);
+          }
+        }
+      }
+
+      @media screen and (min-width: variables.$md-breakpoint-up) {
+        margin-top: 7em;
+        @include mixins.flex-direction(row);
+        justify-content: flex-start;
+      }
+    }
+  }
+}
+
+.relative {
+  position: relative;
+}
+
+.response {
+  height: 100vh;
+  @include mixins.flex;
+  @include mixins.flex-direction(column);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.spinner-text {
+  font-size: 1.5rem;
+  color: white;
+}

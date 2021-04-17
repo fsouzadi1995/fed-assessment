@@ -1,0 +1,128 @@
+<main class="container" *ngIf="!response">
+  <h2>Sign up for email updates</h2>
+  <sub>* Indicates Required Field</sub>
+
+  <form class="newsletter-form" [formGroup]="newsletterForm" (ngSubmit)="submit()">
+    <div class="form-control-row">
+      <div class="form-control relative">
+        <div class="form-control-info">
+          <small [style.opacity]="hasError(fieldNames.FirstName, 'required') ? 1 : 0">First name is required</small>
+          <label for="{{ fieldNames.FirstName }}">FIRST NAME*</label>
+        </div>
+        <input
+          id="{{ fieldNames.FirstName }}"
+          type="text"
+          [formControlName]="fieldNames.FirstName"
+          [class.error]="hasError(fieldNames.FirstName, 'required')"
+        />
+      </div>
+
+      <div class="form-control relative">
+        <div class="form-control-info">
+          <small [style.opacity]="hasError(fieldNames.LastName, 'required') ? 1 : 0">Last name is required</small>
+          <label for="{{ fieldNames.LastName }}">LAST NAME*</label>
+        </div>
+
+        <input
+          id="{{ fieldNames.LastName }}"
+          type="text"
+          [formControlName]="fieldNames.LastName"
+          [class.error]="hasError(fieldNames.LastName, 'required')"
+        />
+      </div>
+    </div>
+
+    <div class="form-control-row">
+      <div class="form-control relative">
+        <div class="form-control-info">
+          <small [style.opacity]="hasError(fieldNames.Email, 'email') ? 1 : 0">Please enter a valid email</small>
+          <small [style.opacity]="hasError(fieldNames.Email, 'required') ? 1 : 0">Email is required</small>
+          <label for="{{ fieldNames.Email }}">EMAIL ADDRESS*</label>
+        </div>
+
+        <input
+          id="{{ fieldNames.Email }}"
+          type="email"
+          [formControlName]="fieldNames.Email"
+          [class.error]="hasError(fieldNames.Email, 'required') || hasError(fieldNames.Email, 'email')"
+        />
+      </div>
+
+      <div class="form-control relative">
+        <div class="form-control-info">
+          <label for="{{ fieldNames.Organization }}">ORGANIZATION</label>
+        </div>
+        <input id="{{ fieldNames.Organization }}" type="text" [formControlName]="fieldNames.Organization" />
+      </div>
+    </div>
+
+    <div class="form-control-row">
+      <div class="form-control relative">
+        <div class="form-control-info">
+          <small [style.opacity]="hasError(fieldNames.EuResident, 'required') ? 1 : 0">EU Resident is required</small>
+          <label for="{{ fieldNames.EuResident }}">EU RESIDENT*</label>
+        </div>
+
+        <select
+          id="{{ fieldNames.EuResident }}"
+          [formControlName]="fieldNames.EuResident"
+          [class.error]="hasError(fieldNames.EuResident, 'required')"
+        >
+          <option [ngValue]="null">- SELECT ONE -</option>
+          <option value="YES">Yes</option>
+          <option value="NO">No</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-control-row">
+      <div class="form-control form-control-updates">
+        <div class="form-control__checkbox" *ngFor="let option of options; index as i">
+          <input
+            type="checkbox"
+            id="{{ option.shortName }}"
+            #inputOption
+            [checked]="!!newsletterForm.get(fieldNames.Updates)!.value.includes(option.shortName)"
+            (change)="onCheckboxChange(inputOption)"
+          />
+          <label for="{{ option.shortName }}">
+            <div>
+              <svg
+                aria-hidden="true"
+                data-prefix="fas"
+                data-icon="check"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                />
+              </svg>
+            </div>
+          </label>
+          <span tabindex="0" (click)="inputOption.click()" (keydown.enter)="inputOption.click()">{{
+            option.name
+          }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="newsletterForm.invalid || !isCheckboxSelected">SUBMIT</button>
+      <button type="reset" (click)="reset($event)">RESET</button>
+    </div>
+  </form>
+</main>
+
+<ng-container *ngIf="response">
+  <div class="response">
+    <p [style.color]="response.status === 'error' ? 'red' : 'green'">{{ response.status | uppercase }}!</p>
+
+    <br />
+    <h1>{{ response.message }}</h1>
+  </div>
+</ng-container>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+  <span class="spinner-text">Loading...</span>
+</ngx-spinner>
