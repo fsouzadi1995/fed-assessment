@@ -1,6 +1,10 @@
 <main class="container" *ngIf="!response">
-  <h2>Sign up for email updates</h2>
-  <sub>* Indicates Required Field</sub>
+  <div class="title">
+    <div><h2>Sign up for email updates</h2></div>
+    <div>
+      <p>* Indicates Required Field</p>
+    </div>
+  </div>
 
   <form class="newsletter-form" [formGroup]="newsletterForm" (ngSubmit)="submit()">
     <div class="form-control-row">

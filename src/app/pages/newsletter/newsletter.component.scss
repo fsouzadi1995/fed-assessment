@@ -11,9 +11,14 @@
     max-width: 1024px;
     margin: auto;
 
-    sub {
-      margin-top: 1em;
-      color: variables.$text_light;
+    .title {
+      div:last-child {
+        margin-top: 1em;
+        p {
+          font-size: 0.9rem;
+          color: variables.$text_light;
+        }
+      }
     }
 
     .newsletter-form {
@@ -35,8 +40,7 @@
             width: 100%;
             display: grid;
             grid-template-areas: 'a';
-            justify-content: space-between;
-            flex-wrap: wrap;
+            @include mixins.justify-content(space-between);
 
             @media screen and (min-width: variables.$md-breakpoint-up) {
               width: 62.5%;
@@ -45,8 +49,8 @@
             }
 
             & .form-control__checkbox {
-              display: inline-flex;
-              align-items: center;
+              @include mixins.inline-flex;
+              @include mixins.align-items(center);
 
               input {
                 display: none;
@@ -54,8 +58,8 @@
 
               label {
                 @include mixins.flex;
-                justify-content: center;
-                align-items: center;
+                @include mixins.justify-content(center);
+                @include mixins.align-items(center);
                 background-color: white;
                 border: 3px solid #ffffff;
                 box-shadow: $shadow;
@@ -71,8 +75,8 @@
                   width: 70%;
 
                   & svg {
-                    display: flex;
-                    justify-content: center;
+                    @include mixins.flex;
+                    @include mixins.justify-content(center);
                     fill: transparent;
                     height: 100%;
                     width: 100%;
@@ -183,7 +187,7 @@
         margin-top: 3em;
         @include mixins.flex;
         @include mixins.flex-direction(row-reverse);
-        justify-content: space-around;
+        @include mixins.justify-content(space-around);
         width: 100%;
 
         button {
@@ -231,7 +235,7 @@
         @media screen and (min-width: variables.$md-breakpoint-up) {
           margin-top: 7em;
           @include mixins.flex-direction(row);
-          justify-content: flex-start;
+          @include mixins.justify-content(flex-start);
         }
       }
     }
@@ -245,8 +249,8 @@
     height: 100vh;
     @include mixins.flex;
     @include mixins.flex-direction(column);
-    align-items: center;
-    justify-content: center;
+    @include mixins.justify-content(center);
+    @include mixins.align-items(center);
     text-align: center;
   }
 
