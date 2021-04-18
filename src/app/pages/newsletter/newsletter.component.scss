@@ -185,6 +185,7 @@
 
       .form-actions {
         margin-top: 3em;
+        margin-bottom: 2em;
         @include mixins.flex;
         @include mixins.flex-direction(row-reverse);
         @include mixins.justify-content(space-around);

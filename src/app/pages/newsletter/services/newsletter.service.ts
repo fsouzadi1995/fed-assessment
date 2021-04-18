@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { AppEndpoints } from '@constants/global/endpoints.constants';
-import { MockService } from '@core/services/mock.service';
-import { NewsletterForm } from '@models/newsletter/newsletter-form.model';
-import { NewsletterDto } from '@models/newsletter/newsletter.dto';
-import { catchError, map, take } from 'rxjs/operators';
-import { NewsletterResponse } from '@models/newsletter/newsletter-response.model';
+import { catchError, map } from 'rxjs/operators';
+import { AppEndpoints } from '@constants/global';
+import { MockService } from '@core/services';
+import { NewsletterForm, NewsletterDto, NewsletterResponse } from '@models/newsletter';
 
 @Injectable({
   providedIn: 'root',
@@ -22,12 +20,9 @@ export class NewsletterService {
       return { ...obj, [key]: typeof value === 'string' ? encodeURI(value.trim()) : value };
     }, {} as NewsletterDto);
 
-    console.log(dto);
-
     return this.mockSvc.post<NewsletterDto>(this.moduleEndpoint, dto).pipe(
       map(() => ({ status: 'success', message: 'Thank you. You are now subscribed.' })),
       catchError(() => of({ status: 'error', message: 'Invalid Subscription request.' })),
-      take(1),
     );
   }
 }
