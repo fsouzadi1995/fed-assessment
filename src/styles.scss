@@ -12,8 +12,9 @@ body {
 }
 
 select {
-  // A reset of styles, including removing the default dropdown arrow
   appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
   border: none;
   padding: 0 1em 0 0;
   margin: 0;
